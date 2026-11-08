@@ -240,4 +240,4 @@ La compatibilità con provider diversi da IASGEST richiede ulteriori test.
 
 ## 14. Licenza
 
-MIT License — SIData Labs.
+MIT License — Copyright © 2026 Sidata S.r.l.
