@@ -1,0 +1,16 @@
+{
+    "name": "sidata-labs/gopenid",
+    "description": "OpenID Connect client library for CodeIgniter 4",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "codeigniter4/framework": "^4.7",
+        "jumbojett/openid-connect-php": "^1.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "SIData\\GOpenID\\": "src/"
+        }
+    }
+}
