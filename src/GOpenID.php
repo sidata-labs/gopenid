@@ -44,7 +44,7 @@ class GOpenID
 
 	protected function validateConfig(): void {
 		foreach (['client_id', 'client_secret', 'url', 'redirect'] as $key) {
-			if (empty($this->config[$key])) throw new \RuntimeException("Configurazione OpenID mancante: ${$key}");
+			if (empty($this->config[$key])) throw new \RuntimeException("Configurazione OpenID mancante: {$key}");
 		}
 
 		$scopes = preg_split('/\s+/', trim($this->config['scope']), -1, PREG_SPLIT_NO_EMPTY) ?: [];
