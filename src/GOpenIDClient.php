@@ -12,6 +12,19 @@ class GOpenIDClient extends OpenIDConnectClient
 {
 	protected array $allowedAlgorithms = ['RS256'];
 
+	/**
+	 * Restituisce l'endpoint RP-Initiated Logout dichiarato dal provider.
+	 */
+	public function getEndSessionEndpoint(): string {
+		$endpoint = $this->getProviderConfigValue('end_session_endpoint');
+
+		if (!is_string($endpoint) || !filter_var($endpoint, FILTER_VALIDATE_URL)) {
+			throw new OpenIDConnectClientException('Endpoint di logout OIDC mancante o non valido nel Discovery.');
+		}
+
+		return $endpoint;
+	}
+
 	public function verifyJWTSignature(string $jwt): bool {
 		$parts = explode('.', $jwt);
 
