@@ -11,6 +11,9 @@
     "autoload": {
         "psr-4": {
             "SIData\\GOpenID\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/openid_helper.php"
+        ]
     }
 }
