@@ -139,7 +139,7 @@ class GOpenID
 	}
 
 	/**
-	* Prepara la richiesta di logout OIDC e restituisce l'URL IASGEST.
+	* Prepara la richiesta di logout OIDC e restituisce l'URL del provider.
 	*/
 	private function logoutStart() {
 		$session = $this->session();
@@ -149,6 +149,9 @@ class GOpenID
 		$idToken = $session->get(self::ID_TOKEN_SESSION_KEY);
 
 		if (!is_string($idToken) || $idToken === '') return false;
+
+		$logoutEndpoint = rtrim($this->client()->getEndSessionEndpoint(), '?&');
+		$separator = str_contains($logoutEndpoint, '?') ? '&' : '?';
 
 		$session->remove(self::SESSION_KEY);
 
@@ -167,7 +170,7 @@ class GOpenID
 		}
 
 		$session->set([
-			self::LOGOUT_URL => $this->config['url'].'/openid/logout?'.http_build_query($params),
+			self::LOGOUT_URL => $logoutEndpoint.$separator.http_build_query($params, '', '&', PHP_QUERY_RFC3986),
 			self::LOGOUT_CREATED_AT => time()
 		]);
 
