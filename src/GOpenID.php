@@ -231,7 +231,7 @@ class GOpenID
 			'start' => $this->logoutStart(),
 			'pending' => $this->logoutPending(),
 			'end' => $this->logoutEnd(),
-			default => throw new \InvalidArgumentException("Azione logout non valida: ${action}")
+			default => throw new \InvalidArgumentException("Azione logout non valida: {$action}")
 		};
 	}
 }
