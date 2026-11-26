@@ -213,6 +213,18 @@ Le richieste duplicate possono riutilizzare l'URL di logout preparato entro un T
 
 Il logout non implica necessariamente la disconnessione da tutte le altre applicazioni collegate allo stesso provider.
 
+### Invalidazione locale della sessione (clearSession)
+
+```php
+GOpenID()->clearSession();
+```
+
+Il metodo invalida l'identità OIDC locale, rimuove l'ID Token e i dati del logout eventualmente in corso, e azzera l'istanza interna del client. Non distrugge l'intera sessione CodeIgniter e non avvia il logout presso l'Identity Provider.
+
+È utile, ad esempio, quando l'autenticazione OIDC è riuscita ma il provisioning o un altro controllo applicativo fallisce. Dopo la chiamata, `isAuthenticated()` restituisce `false`, mentre `user()` e `sub()` restituiscono `null`.
+
+**Attenzione:** se la sessione presso il provider è ancora attiva, un successivo accesso a una rotta protetta può avviare automaticamente una nuova autenticazione OIDC senza richiedere nuovamente le credenziali. In caso di errore applicativo, evitare quindi un redirect immediato verso una rotta protetta. Per il logout presso il provider utilizzare invece il flusso `logout()` descritto sopra.
+
 ## 11. Collaudo rapido
 
 1. Aprire una pagina privata, per esempio `/ordini`, senza autenticazione.
