@@ -134,6 +134,22 @@ class GOpenID
 		return $this->user()['sub'] ?? null;
 	}
 
+	/**
+	* Invalida l'identità OIDC locale senza avviare
+	* il logout presso l'Identity Provider.
+	*/
+	public function clearSession(): void {
+		$this->session()->remove([
+			self::SESSION_KEY,
+			self::ID_TOKEN_SESSION_KEY,
+			self::LOGOUT_STATE_SESSION_KEY,
+			self::LOGOUT_URL,
+			self::LOGOUT_CREATED_AT
+		]);
+
+		$this->client = null;
+	}
+
 	public function login(): void {
 		$this->client()->authenticate();
 	}
